@@ -15,12 +15,10 @@ jobs:
               with:
                   github-token: ${{ secrets.TOKEN_GITHUB }}
                   script: |
-                    await github.actions.createWorkflowDispatch({
-                      owner: Dimitar-Peev,
-                      repo: Terraform-Actions-Azure,
-                      workflow_id: 'terraform-test.yml',
-                      ref: 'main',
-                      inputs: {
-                        // Add any necessary inputs for the workflow here
-                      }
-                    });
+                      await github.rest.actions.createWorkflowDispatch({
+                        owner: 'Dimitar-Peev',
+                        repo: 'Terraform-Actions-Azure',
+                        workflow_id: 'terraform-test.yml',
+                        ref: 'main',
+                        inputs: {}
+                      });
