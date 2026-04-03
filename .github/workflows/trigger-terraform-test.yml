@@ -1,0 +1,26 @@
+name: Trigger external Terraform Test Workflow
+
+on:
+    push:
+        branches: ["main"]
+
+jobs:
+    trigger-terraform-test:
+        name: "Trigger Terraform Test Workflow"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Trigger Terraform Test Workflow"
+              uses: actions/github-script@v7
+              with:
+                  github-token: ${{ secrets.TOKEN_GITHUB }}
+                  script: |
+                    await github.actions.createWorkflowDispatch({
+                      owner: Dimitar-Peev,
+                      repo: Terraform-Actions-Azure,
+                      workflow_id: 'terraform-test.yml',
+                      ref: 'main',
+                      inputs: {
+                        // Add any necessary inputs for the workflow here
+                      }
+                    });
